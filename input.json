@@ -1,0 +1,32 @@
+[
+  {
+    "id": "M1",
+    "channel": "email",
+    "sender_name": "Microsoft Security",
+    "sender_address": "no-reply@rnicrosoft.com",
+    "subject": "Urgent password reset required",
+    "body": "Your account will be disabled today. Verify your account immediately.",
+    "links": [
+      {
+        "display_text": "Reset password",
+        "actual_url": "http://security-reset-example.com"
+      }
+    ],
+    "attachments": []
+  },
+  {
+    "id": "M2",
+    "channel": "sms",
+    "sender_name": "Unknown",
+    "sender_address": "+393331112222",
+    "subject": "",
+    "body": "Your package is blocked. Pay a small fee now.",
+    "links": [
+      {
+        "display_text": "Pay fee",
+        "actual_url": "http://short-pay-example.com"
+      }
+    ],
+    "attachments": []
+  }
+]
