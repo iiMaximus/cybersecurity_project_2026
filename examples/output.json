@@ -1,0 +1,139 @@
+{
+    "summary": {
+        "total_messages": 5,
+        "legitimate": 1,
+        "suspicious": 0,
+        "phishing": 4
+    },
+    "results": [
+        {
+            "id": "M1",
+            "channel": "email",
+            "risk_score": 115,
+            "classification": "phishing",
+            "triggered_indicators": [
+                {
+                    "name": "unknown_sender",
+                    "weight": 15,
+                    "evidence": "Sender domain is not trusted: rnicrosoft.com"
+                },
+                {
+                    "name": "lookalike_domain",
+                    "weight": 25,
+                    "evidence": "rnicrosoft.com looks like microsoft.com"
+                },
+                {
+                    "name": "urgent_language",
+                    "weight": 15,
+                    "evidence": "Urgent words found: ['urgent', 'immediately', 'today']"
+                },
+                {
+                    "name": "credential_request",
+                    "weight": 25,
+                    "evidence": "Credential words found: ['password', 'verify your account']"
+                },
+                {
+                    "name": "non_https_link",
+                    "weight": 15,
+                    "evidence": "HTTP links found: ['http://security-reset-example.com']"
+                },
+                {
+                    "name": "suspicious_link",
+                    "weight": 20,
+                    "evidence": "Untrusted links found: ['http://security-reset-example.com']"
+                }
+            ]
+        },
+        {
+            "id": "M2",
+            "channel": "email",
+            "risk_score": 0,
+            "classification": "legitimate",
+            "triggered_indicators": []
+        },
+        {
+            "id": "M3",
+            "channel": "sms",
+            "risk_score": 85,
+            "classification": "phishing",
+            "triggered_indicators": [
+                {
+                    "name": "unknown_sender",
+                    "weight": 15,
+                    "evidence": "Sender is not a normal email address"
+                },
+                {
+                    "name": "urgent_language",
+                    "weight": 15,
+                    "evidence": "Urgent words found: ['today', 'final warning']"
+                },
+                {
+                    "name": "payment_request",
+                    "weight": 20,
+                    "evidence": "Payment words found: ['payment']"
+                },
+                {
+                    "name": "non_https_link",
+                    "weight": 15,
+                    "evidence": "HTTP links found: ['http://delivery-payment-example.com']"
+                },
+                {
+                    "name": "suspicious_link",
+                    "weight": 20,
+                    "evidence": "Untrusted links found: ['http://delivery-payment-example.com']"
+                }
+            ]
+        },
+        {
+            "id": "M4",
+            "channel": "email",
+            "risk_score": 60,
+            "classification": "phishing",
+            "triggered_indicators": [
+                {
+                    "name": "unknown_sender",
+                    "weight": 15,
+                    "evidence": "Sender domain is not trusted: strange-company.example"
+                },
+                {
+                    "name": "payment_request",
+                    "weight": 20,
+                    "evidence": "Payment words found: ['invoice', 'bank transfer']"
+                },
+                {
+                    "name": "dangerous_attachment",
+                    "weight": 25,
+                    "evidence": "Dangerous attachments found: ['invoice.exe']"
+                }
+            ]
+        },
+        {
+            "id": "M5",
+            "channel": "social",
+            "risk_score": 85,
+            "classification": "phishing",
+            "triggered_indicators": [
+                {
+                    "name": "unknown_sender",
+                    "weight": 15,
+                    "evidence": "Sender domain is not trusted: g00gle.com"
+                },
+                {
+                    "name": "lookalike_domain",
+                    "weight": 25,
+                    "evidence": "g00gle.com looks like google.com"
+                },
+                {
+                    "name": "credential_request",
+                    "weight": 25,
+                    "evidence": "Credential words found: ['login']"
+                },
+                {
+                    "name": "suspicious_link",
+                    "weight": 20,
+                    "evidence": "Untrusted links found: ['https://g00gle.com/login']"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,79 @@
+{
+  "messages": [
+    {
+      "id": "M1",
+      "channel": "email",
+      "sender_name": "Microsoft Security",
+      "sender_address": "no-reply@rnicrosoft.com",
+      "subject": "Urgent password reset required",
+      "body": "Your account will be disabled today. Verify your account immediately.",
+      "links": [
+        {
+          "display_text": "Reset password",
+          "actual_url": "http://security-reset-example.com"
+        }
+      ],
+      "attachments": []
+    },
+    {
+      "id": "M2",
+      "channel": "email",
+      "sender_name": "Polito Administration",
+      "sender_address": "office@polito.it",
+      "subject": "Exam calendar update",
+      "body": "The updated exam calendar is available on the official student portal.",
+      "links": [
+        {
+          "display_text": "Student Portal",
+          "actual_url": "https://students.polito.it/calendar"
+        }
+      ],
+      "attachments": []
+    },
+    {
+      "id": "M3",
+      "channel": "sms",
+      "sender_name": "Unknown",
+      "sender_address": "+393331112222",
+      "subject": "",
+      "body": "Final warning: your package is blocked. Pay the payment today using this link.",
+      "links": [
+        {
+          "display_text": "Pay fee",
+          "actual_url": "http://delivery-payment-example.com"
+        }
+      ],
+      "attachments": []
+    },
+    {
+      "id": "M4",
+      "channel": "email",
+      "sender_name": "Invoice Office",
+      "sender_address": "billing@strange-company.example",
+      "subject": "Invoice attached",
+      "body": "Please check the invoice and complete the bank transfer.",
+      "links": [],
+      "attachments": [
+        {
+          "filename": "invoice.exe",
+          "type": "executable"
+        }
+      ]
+    },
+    {
+      "id": "M5",
+      "channel": "social",
+      "sender_name": "Google Support",
+      "sender_address": "support@g00gle.com",
+      "subject": "Security code needed",
+      "body": "Login to confirm your account and enter your security code.",
+      "links": [
+        {
+          "display_text": "Google account",
+          "actual_url": "https://g00gle.com/login"
+        }
+      ],
+      "attachments": []
+    }
+  ]
+}
