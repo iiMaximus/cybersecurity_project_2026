@@ -8,15 +8,16 @@ LOOKALIKE_DOMAINS = {
     "rnicrosoft.com": "microsoft.com",
     "paypa1.com": "paypal.com",
     "g00gle.com": "google.com"
-}
+} #domains that try to impersonate real ones by looking similar, of course thease dictionaries can be expanded to include much more domains and words to improve accuracy
 
 URGENCY_WORDS = ["urgent", "immediately", "today", "right now", "final warning"]
 CREDENTIAL_WORDS = ["password", "login", "credentials", "verify your account"]
 PAYMENT_WORDS = ["payment", "invoice", "bank transfer", "gift card", "refund"]
 DANGEROUS_TYPES = ["executable", "script", "macro", "archive"]
+#phising messeges will often use urgent keywords to stress out the reciever hoping that they will make a mistake under time pressure
 
 
-def load_messages(input_file):
+def load_messages(input_file): #loading the input file and turning it into a dictonary
     file = open(input_file, "r")
     data = json.load(file)
     file.close()
@@ -30,7 +31,7 @@ def load_messages(input_file):
     return contents
 
 
-def save_output(output, output_file):
+def save_output(output, output_file): #saving the output file
     file = open(output_file, "w")
     json.dump(output, file, indent=4)
     file.close()
@@ -45,8 +46,8 @@ def get_sender_domain(sender_address):
 
 
 def get_link_domain(link):
-    # Very simple URL domain extraction.
-    # Example: http://fake.com/login -> fake.com
+    #very simple URL domain extraction.
+    #example: http://fake.com/login -> fake.com
     link = link.replace("https://", "")
     link = link.replace("http://", "")
 
@@ -54,14 +55,14 @@ def get_link_domain(link):
     return parts[0].lower()
 
 
-def check_unknown_sender(message):
+def check_unknown_sender(message):     #this function checks if the sender used a real email address, and if that email address domain is trusted (for example @polito.it)
     sender = message["sender_address"]
     domain = get_sender_domain(sender)
 
     if domain == "":
         return {
             "name": "unknown_sender",
-            "weight": 15,
+            "weight": 15,           #each "red flag" has a weight assigned based on how likely it is to be phising, thease later on get added
             "evidence": "Sender is not a normal email address"
         }
 
@@ -81,7 +82,7 @@ def check_unknown_sender(message):
     return None
 
 
-def check_lookalike_domain(message):
+def check_lookalike_domain(message):  #here we compare to the lookalike domain list to make sure that the messege is not trying to impersonate a real company (eg: microsoft.com vs rnicrosoft.com)
     sender = message["sender_address"]
     domain = get_sender_domain(sender)
 
@@ -95,7 +96,7 @@ def check_lookalike_domain(message):
     return None
 
 
-def check_urgent_words(message):
+def check_urgent_words(message):   #checking for urgent keywords - thease scare people and make them more likely to take action (eg: Please take action immedietly or your account will be deleted today)
     text = message["subject"] + " " + message["body"]
     text = text.lower()
 
@@ -115,7 +116,7 @@ def check_urgent_words(message):
     return None
 
 
-def check_credentials(message):
+def check_credentials(message):      #here we check whether the messege is asking for user credentials such as a log in or password
     text = message["subject"] + " " + message["body"]
     text = text.lower()
 
@@ -135,7 +136,7 @@ def check_credentials(message):
     return None
 
 
-def check_payment(message):
+def check_payment(message):       #checking wether the messege is asking the user to pay, for example requesting a gift card
     text = message["subject"] + " " + message["body"]
     text = text.lower()
 
@@ -155,7 +156,7 @@ def check_payment(message):
     return None
 
 
-def check_http_links(message):
+def check_http_links(message):       #check if link is HTTP vs. HTTPS (more secure)
     bad_links = []
 
     for link in message["links"]:
@@ -174,7 +175,7 @@ def check_http_links(message):
     return None
 
 
-def check_suspicious_links(message):
+def check_suspicious_links(message):      #checking if the links is in the list of trusted domains
     bad_links = []
 
     for link in message["links"]:
@@ -200,7 +201,7 @@ def check_suspicious_links(message):
     return None
 
 
-def check_attachments(message):
+def check_attachments(message):           #finally we check for potentially dangerous attachments like executables etc
     bad_files = []
 
     for attachment in message["attachments"]:
@@ -219,7 +220,7 @@ def check_attachments(message):
     return None
 
 
-def classify(score):
+def classify(score):    #using the weights from each rule function we check if a messege is legitimate, suspecious or phising based on the sum of the total weights
     if score >= 50:
         return "phishing"
     elif score >= 20:
@@ -228,7 +229,7 @@ def classify(score):
         return "legitimate"
 
 
-def analyze_message(message_id, contents):
+def analyze_message(message_id, contents):  #here we combine the results of all the previous functions
     message = contents[message_id]
     indicators = []
 
@@ -294,7 +295,7 @@ def main():
     suspicious = 0
     phishing = 0
 
-    for message_id in contents:
+    for message_id in contents: #analyze each messege
         result = analyze_message(message_id, contents)
         results.append(result)
 
